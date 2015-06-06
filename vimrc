@@ -83,13 +83,13 @@ endif
 
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 " 突出显示当前行等
-set cursorcolumn
+"set cursorcolumn
 set cursorline          " 突出显示当前行
 
 
 "设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
 "好处：误删什么的，如果以前屏幕打开，可以找回
-set t_ti= t_te=
+"set t_ti= t_te=
 
 
 "- 则点击光标不会换,用于复制
@@ -119,7 +119,8 @@ set magic
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+" 开启的话，到行首的时候再往左，会回到上一行
+"set whichwrap+=<,>,h,l
 
 "==========================================
 " Display Settings 展示/排版等界面格式设置
@@ -156,7 +157,7 @@ set matchtime=2
 " 高亮search命中的文本。
 set hlsearch
 " 打开增量搜索模式,随着键入即时搜索
-set incsearch
+"set incsearch
 " 搜索时忽略大小写
 set ignorecase
 " 有一个或以上大写字母时仍大小写敏感
@@ -210,20 +211,25 @@ set nrformats=
 
 
 " 相对行号      行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber number
-au FocusLost * :set norelativenumber number
-au FocusGained * :set relativenumber
-" 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+"加入是否开启相对行号的设置　 by astraylinux
+let g:is_relativenumber = 0
+
+if g:is_relativenumber
+    set relativenumber number
+    au FocusLost * :set norelativenumber number
+    au FocusGained * :set relativenumber
+    "插入模式下用绝对行号, 普通模式下用相对
+    autocmd InsertEnter * :set norelativenumber number
+    autocmd InsertLeave * :set relativenumber
+    function! NumberToggle()
+      if(&relativenumber == 1)
+        set norelativenumber number
+      else
+        set relativenumber
+      endif
+    endfunc
+    nnoremap <C-n> :call NumberToggle()<cr>
+endif
 
 
 "==========================================
@@ -286,10 +292,10 @@ endif
 " 主要按键重定义
 
 " 关闭方向键, 强迫自己用 hjkl
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+"map <Left> <Nop>
+"map <Right> <Nop>
+"map <Up> <Nop>
+"map <Down> <Nop>
 
 "Treat long lines as break lines (useful when moving around in them)
 "se swap之后，同物理行上线直接跳
@@ -311,13 +317,18 @@ noremap <F1> <Esc>"
 
 ""为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
-  if(&relativenumber == &number)
-    set relativenumber! number!
-  elseif(&number)
-    set number!
-  else
-    set relativenumber!
-  endif
+    "加入是否开启相对行号的判断 by astraylinux
+    if g:is_relativenumber
+        if(&relativenumber == &number)
+          "set relativenumber! number!
+        elseif(&number)
+          set number!
+        else
+          set relativenumber!
+        endif
+    else
+        set number!
+    endif
   set number?
 endfunc
 nnoremap <F2> :call HideNumber()<CR>
@@ -563,14 +574,16 @@ if has("gui_running")
 endif
 
 " theme主题
+"set background=dark
 set background=dark
 set t_Co=256
-colorscheme solarized
-" colorscheme molokai
+" colorscheme elflord
+colorscheme molokai
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 " colorscheme desert
-
+" colorscheme grb256
+" colorscheme solarized
 
 
 "设置标记一列的背景颜色和数字一行颜色一致
@@ -587,5 +600,19 @@ highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
+
+
+"文件高亮映射for hexo , by astraylinux
+au BufRead,BufNewFile *.styl setfiletype css
+au BufRead,BufNewFile *.swig setfiletype php
+
+"let g:neocomplcache_enable_at_startup = 1
+
+"高亮字体加粗 by astraylinux
+"if &term=="xterm"
+"    set t_Co=8
+"    set t_Sb=^[[4%dm
+"    set t_Sf=^[[3%dm
+"endif
 
 

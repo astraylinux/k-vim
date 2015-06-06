@@ -1,5 +1,72 @@
 k-vim
 =======================
+感谢[wklken](https://github.com/wklken)为大家提供这么好的集成工具。
+
+在原来作者的配置上做了自己惯的修改
+
+相对行号的设置让我很不习惯，加上了is_relativenumber这个变量，并在要使用相对行号前做判断
+``bash
+let g:is_relativenumber = 0
+
+if g:is_relativenumber
+    set relativenumber number
+    au FocusLost * :set norelativenumber number
+    au FocusGained * :set relativenumber
+    "插入模式下用绝对行号, 普通模式下用相对
+    autocmd InsertEnter * :set norelativenumber number
+    autocmd InsertLeave * :set relativenumber
+    function! NumberToggle()
+      if(&relativenumber == 1)
+        set norelativenumber number
+      else
+        set relativenumber
+      endif
+    endfunc
+    nnoremap <C-n> :call NumberToggle()<cr>
+endif
+
+
+function! HideNumber()
+    "加入是否开启相对行号的判断 by astraylinux
+    if g:is_relativenumber
+        if(&relativenumber == &number)
+          "set relativenumber! number!
+        elseif(&number)
+          set number!
+        else
+          set relativenumber!
+        endif
+    else
+        set number!
+    endif
+  set number?
+endfunc
+```
+
+去掉了从行首往左到上一行末，习惯问题
+```bash
+"set whichwrap+=<,>,h,l
+```
+
+autoload里加入了一个indent目录，设置foldlevel为0的话，打开文件会自动折叠
+
+最近在用Hexo搭博客，所以映射了两种格式
+```bash
+au BufRead,BufNewFile *.styl setfiletype css
+au BufRead,BufNewFile *.swig setfiletype php
+```
+
+搜索实时跳转也让我很不习惯，跳来跳去的，去掉了。
+```bash
+"set incsearch
+```
+
+python 语法启用pylint, 放上pylintrc
+使用YouCompleteMe需要vim 7.4
+
+关闭方向键只适合新手吧:joy:
+
+=======================
 
 > VERSION: 9.0
 

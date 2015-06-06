@@ -1,4 +1,5 @@
 bundle/*
+vim74/
 *.pyc
 *.bak
 *.bk
