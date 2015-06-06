@@ -5,7 +5,7 @@ k-vim
 在原来作者的配置上做了自己惯的修改
 
 相对行号的设置让我很不习惯，加上了is_relativenumber这个变量，并在要使用相对行号前做判断
-``bash
+```bash
 let g:is_relativenumber = 0
 
 if g:is_relativenumber
