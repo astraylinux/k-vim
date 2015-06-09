@@ -50,6 +50,7 @@ let g:syntastic_python_checkers=['pylint']
 " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
 " let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
 " let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+let g:pylint_onwrite = 1
 
 
 let g:syntastic_javascript_checkers = ['jsl', 'jshint']

@@ -146,7 +146,7 @@ set laststatus=2
 "显示行号：
 set number
 " 取消换行。
-set nowrap
+set wrap
 
 " 括号配对情况,跳转并高亮一下匹配的括号
 set showmatch
@@ -198,7 +198,7 @@ set tabstop=4     " 设置Tab键的宽度        [等同的空格个数]
 set shiftwidth=4  " 每一次缩进对应的空格数
 set softtabstop=4 " 按退格键时可以一次删掉 4 个空格
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
-set expandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set noexpandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 
 " A buffer becomes hidden when it is abandoned
@@ -508,8 +508,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 "==========================================
 
 " Python 文件的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType python set tabstop=4 shiftwidth=4 noexpandtab ai
+autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab ai
 autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
 
 
