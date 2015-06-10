@@ -449,7 +449,7 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 " 标签导航
 Bundle 'majutsushi/tagbar'
-nmap <F9> :TagbarToggle<CR>
+nmap <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 " for ruby
 let g:tagbar_type_ruby = {
@@ -509,7 +509,7 @@ let g:quickrun_config = {
 
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
+map <F4> :QuickRun<CR>
 
 " ###### Python #########
 
@@ -596,4 +596,22 @@ Bundle 'Glench/Vim-Jinja2-Syntax'
 " nnoremap <leader>y :call Yapf()<cr>
 
 " Bundle 'amoffat/snake'
+
+"############################ 开发调试 #################################
+"调试监视插件，如果是python需要vim支持python
+Bundle 'brookhong/DBGPavim'
+
+let g:dbgPavimPort = 9009
+let g:dbgPavimBreakAtEntry = 0
+
+
+
+
+
+
+
+
+
+
 "------------------------------------------- end of configs --------------------------------------------
+"

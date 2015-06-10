@@ -30,6 +30,7 @@ let g:mapleader = ','
 " 开启语法高亮
 syntax on
 
+set helplang=cn
 
 " install Vundle bundles
 if filereadable(expand("~/.vimrc.bundles"))
@@ -311,6 +312,10 @@ nnoremap gj j
 " F4 换行开关
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " F6 语法开关，关闭语法可以加快大文件的展示
+" =========================================== 以上废弃
+" F1 行号开关，用于鼠标复制代码用
+" F2 粘贴模式paste_mode开关,用于有格式的代码粘贴
+" F3 语法开关，关闭语法可以加快大文件的展示
 
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
 noremap <F1> <Esc>"
@@ -331,18 +336,18 @@ function! HideNumber()
     endif
   set number?
 endfunc
-nnoremap <F2> :call HideNumber()<CR>
-nnoremap <F3> :set list! list?<CR>
-nnoremap <F4> :set wrap! wrap?<CR>
+nnoremap <F1> :call HideNumber()<CR>
+"nnoremap <F3> :set list! list?<CR>
+"nnoremap <F4> :set wrap! wrap?<CR>
               "set paste
-set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
+set pastetoggle=<F2>            "    when in insert mode, press <F5> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
 
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
 
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+nnoremap <F3> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 
 
 "Smart way to move between windows 分屏窗口移动
