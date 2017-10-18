@@ -174,7 +174,7 @@ set foldenable
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=0
 " 代码折叠自定义快捷键
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
@@ -199,7 +199,7 @@ set tabstop=4     " 设置Tab键的宽度        [等同的空格个数]
 set shiftwidth=4  " 每一次缩进对应的空格数
 set softtabstop=4 " 按退格键时可以一次删掉 4 个空格
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
-set noexpandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set expandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 
 " A buffer becomes hidden when it is abandoned
@@ -513,8 +513,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 "==========================================
 
 " Python 文件的一般设置，比如不要 tab 等
-autocmd FileType python set tabstop=4 shiftwidth=4 noexpandtab ai
-autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab ai
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
 
 
@@ -581,14 +581,15 @@ endif
 " theme主题
 "set background=dark
 set background=dark
-set t_Co=256
+" set term guicolors
+ set t_Co=256
 " colorscheme elflord
 colorscheme molokai
+" colorscheme solarized
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 " colorscheme desert
 " colorscheme grb256
-" colorscheme solarized
 
 
 "设置标记一列的背景颜色和数字一行颜色一致
